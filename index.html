@@ -746,7 +746,7 @@
         // Render Screen 1
         function renderScreen1() {
             return `
-                <div class="flex flex-col items-center text-center space-y-7 bg-white/3 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] relative overflow-hidden animate-fadeIn">
+                <div class="flex flex-col items-center text-center space-y-7 bg-white/3 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]">
                     <div class="absolute top-0 inset-x-0 h-32 bg-linear-to-b from-pink-500/10 to-transparent pointer-events-none" />
                     
                     <div class="relative z-10">
@@ -763,7 +763,7 @@
                         </p>
                     </div>
                     
-                    <button onclick="handleScreen1Next()" class="w-full mt-2 px-8 py-4 bg-linear-to-r from-[#ff4d6d] to-[#ff758f] rounded-4xl font-semibold text-white shadow-[0_0_20px_rgba(255,77,109,0.4)] transition-all hover:scale-105 active:scale-95">
+                    <button onclick="handleScreen1Next()" class="w-full mt-2 px-8 py-4 bg-linear-to-r from-[#ff4d6d] to-[#ff758f] rounded-4xl font-semibold text-white shadow-[0_0_20px_rgba(255,77,109,0.4)]">
                         <span class="relative z-10 flex items-center justify-center gap-2">
                             Open it <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </span>
@@ -775,7 +775,7 @@
         // Render Screen 2
         function renderScreen2() {
             return `
-                <div class="flex flex-col items-center text-center space-y-7 bg-white/3 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] relative overflow-hidden animate-fadeIn">
+                <div class="flex flex-col items-center text-center space-y-7 bg-white/3 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]">
                     <div class="absolute top-0 inset-x-0 h-32 bg-linear-to-b from-rose-500/10 to-transparent pointer-events-none" />
                     
                     <div class="relative animate-rotate">
@@ -792,7 +792,7 @@
                         </p>
                     </div>
                     
-                    <button onclick="handleScreen2Next()" class="w-full mt-2 px-8 py-4 bg-linear-to-r from-[#fb7185] to-[#e11d48] rounded-4xl font-semibold text-white shadow-[0_0_25px_rgba(225,29,72,0.4)] transition-all hover:scale-105 active:scale-95">
+                    <button onclick="handleScreen2Next()" class="w-full mt-2 px-8 py-4 bg-linear-to-r from-[#fb7185] to-[#e11d48] rounded-4xl font-semibold text-white shadow-[0_0_25px_rgba(225,29,72,0.4)]">
                         <span class="relative z-10 flex items-center justify-center gap-2">
                             Let me show you <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                         </span>
@@ -813,7 +813,7 @@
                 const visibility = isActive || isPast ? 'visible' : 'hidden';
                 
                 return `
-                    <div class="absolute top-1/2 -translate-y-1/2 w-full text-4xl md:text-5xl font-black tracking-wide leading-tight will-change-transform" style="opacity: ${opacity}; transform: scale(${scale}) translateY(${isActive ? 0 : 40}px); filter: blur(${blur}px); z-index: ${zIndex}; visibility: ${visibility}; transition: all 0.3s ease;">
+                    <div class="absolute top-1/2 -translate-y-1/2 w-full text-4xl md:text-5xl font-black tracking-wide leading-tight will-change-transform" style="opacity: ${opacity}; transform: scale(${scale}) blur(${blur}px); z-index: ${zIndex}; visibility: ${visibility};">
                         ${line}
                     </div>
                 `;
@@ -823,7 +823,7 @@
                 const height = 20 + Math.random() * 20;
                 const duration = 0.6 + Math.random() * 0.4;
                 return `
-                    <div class="w-2.5 rounded-full shadow-[0_0_10px_rgba(244,114,182,0.5)]" style="height: 12px; background-color: #fbcfe8; animation: heightPulse ${duration}s ease-in-out infinite; --bar-height: ${height}px; animation-delay: ${i * 0.1}s;"></div>
+                    <div class="w-2.5 rounded-full shadow-[0_0_10px_rgba(244,114,182,0.5)]" style="height: 12px; background-color: #fbcfe8; animation: heightPulse ${duration}s ease-in-out infinite; --bar-height: ${height}px;"></div>
                 `;
             }).join('');
 
@@ -849,7 +849,7 @@
                         <img src="/gifs/hug.gif" alt="hug" class="h-54 relative z-10" style="filter: drop-shadow(0 25px 25px rgba(0,0,0,0.15));" />
                     </div>
                     
-                    <div class="bg-white/3 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4)] w-full relative overflow-hidden" style="animation: slideUp 0.8s ease-out 0.6s both;">
+                    <div class="bg-white/3 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4)] w-full relative overflow-hidden" style="animation: slideUp 0.8s ease-out;">
                         <div class="absolute top-0 inset-x-0 h-full bg-linear-to-b from-pink-500/5 to-transparent pointer-events-none" />
                         
                         <h1 class="text-4xl font-black mb-3 text-transparent bg-clip-text bg-linear-to-br from-pink-200 via-purple-200 to-indigo-200" style="filter: drop-shadow(0 0 15px rgba(236,72,153,0.5));">
