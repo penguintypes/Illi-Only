@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something for you!</title>
+    <meta name="description" content="I made something special for you.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Framer Motion CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+        :root {
+            --background: #0a040f;
+            --foreground: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--foreground);
+            font-family: 'Shantell Sans', cursive;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .min-h-screen {
+            min-height: 100vh;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .absolute {
+            position: absolute;
+        }
+
+        .fixed {
+            position: fixed;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .gap-2 {
+            gap: 0.5rem;
+        }
+
+        .gap-1\.5 {
+            gap: 0.375rem;
+        }
+
+        .space-y-7 > * + * {
+            margin-top: 1.75rem;
+        }
+
+        .space-y-8 > * + * {
+            margin-top: 2rem;
+        }
+
+        .space-y-3 > * + * {
+            margin-top: 0.75rem;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+
+        .p-5 {
+            padding: 1.25rem;
+        }
+
+        .p-8 {
+            padding: 2rem;
+        }
+
+        .px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .pt-0 {
+            padding-top: 0;
+        }
+
+        .pb-10 {
+            padding-bottom: 2.5rem;
+        }
+
+        .bottom-4 {
+            bottom: 1rem;
+        }
+
+        .right-4 {
+            right: 1rem;
+        }
+
+        .bottom-10 {
+            bottom: 2.5rem;
+        }
+
+        .rounded-\[3rem\] {
+            border-radius: 3rem;
+        }
+
+        .rounded-\[2\.5rem\] {
+            border-radius: 2.5rem;
+        }
+
+        .rounded-4xl {
+            border-radius: 1rem;
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        .border {
+            border: 1px solid;
+        }
+
+        .border-white\/8 {
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .bg-white\/3 {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .bg-black {
+            background-color: #000000;
+        }
+
+        .bg-\[\#08030a\] {
+            background-color: #08030a;
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .inset-0 {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .backdrop-blur-2xl {
+            backdrop-filter: blur(40px);
+        }
+
+        .blur-\[150px\] {
+            filter: blur(150px);
+        }
+
+        .blur-\[160px\] {
+            filter: blur(160px);
+        }
+
+        .blur-2xl {
+            filter: blur(40px);
+        }
+
+        .shadow-\[0_20px_40px_rgba\(0\,0\,0\,0\.4\)\,inset_0_1px_0_rgba\(255\,255\,255\,0\.1\)\] {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .shadow-\[0_0_20px_rgba\(255\,77\,109\,0\.4\)\] {
+            box-shadow: 0 0 20px rgba(255,77,109,0.4);
+        }
+
+        .shadow-\[0_0_25px_rgba\(225\,29\,72\,0\.4\)\] {
+            box-shadow: 0 0 25px rgba(225,29,72,0.4);
+        }
+
+        .drop-shadow-\[0_2px_10px_rgba\(244\,114\,182\,0\.2\)\] {
+            filter: drop-shadow(0 2px 10px rgba(244,114,182,0.2));
+        }
+
+        .drop-shadow-\[0_0px_15px_rgba\(244\,113\,133\,0\.4\)\] {
+            filter: drop-shadow(0 0px 15px rgba(244,113,133,0.4));
+        }
+
+        .drop-shadow-\[0_0_20px_rgba\(244\,114\,182\,0\.6\)\] {
+            filter: drop-shadow(0 0 20px rgba(244,114,182,0.6));
+        }
+
+        .drop-shadow-\[0_0_15px_rgba\(236\,72\,153\,0\.5\)\] {
+            filter: drop-shadow(0 0 15px rgba(236,72,153,0.5));
+        }
+
+        .drop-shadow-2xl {
+            filter: drop-shadow(0 25px 25px rgba(0,0,0,0.15));
+        }
+
+        .shadow-\[0_0_10px_rgba\(244\,114\,182\,0\.5\)\] {
+            box-shadow: 0 0 10px rgba(244,114,182,0.5);
+        }
+
+        .text-pink-50 {
+            color: #fdf2f8;
+        }
+
+        .text-white {
+            color: #ffffff;
+        }
+
+        .text-white\/40 {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .text-pink-200 {
+            color: #fbcfe8;
+        }
+
+        .text-pink-200\/70 {
+            color: rgba(251, 207, 232, 0.7);
+        }
+
+        .text-pink-200\/80 {
+            color: rgba(251, 207, 232, 0.8);
+        }
+
+        .text-pink-100 {
+            color: #fce7f3;
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+
+        .text-\[2rem\] {
+            font-size: 2rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .font-extrabold {
+            font-weight: 800;
+        }
+
+        .font-black {
+            font-weight: 900;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-light {
+            font-weight: 300;
+        }
+
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+
+        .tracking-wide {
+            letter-spacing: 0.025em;
+        }
+
+        .leading-tight {
+            line-height: 1.25;
+        }
+
+        .bg-linear-to-br {
+            background-image: linear-gradient(135deg, var(--tw-gradient-stops));
+        }
+
+        .from-pink-200 {
+            --tw-gradient-from: #fbcfe8;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(251, 207, 232, 0));
+        }
+
+        .via-pink-300 {
+            --tw-gradient-stops: var(--tw-gradient-from), #f9a8d4, var(--tw-gradient-to, rgba(249, 168, 212, 0));
+        }
+
+        .to-rose-200 {
+            --tw-gradient-to: #fecdd3;
+        }
+
+        .bg-clip-text {
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .text-transparent {
+            color: transparent;
+        }
+
+        .from-\[#ff4d6d\] {
+            --tw-gradient-from: #ff4d6d;
+        }
+
+        .to-\[#ff758f\] {
+            --tw-gradient-to: #ff758f;
+        }
+
+        .bg-linear-to-r {
+            background-image: linear-gradient(to right, var(--tw-gradient-stops));
+        }
+
+        .bg-linear-to-b {
+            background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+        }
+
+        .from-rose-100 {
+            --tw-gradient-from: #ffe4e6;
+        }
+
+        .to-rose-400 {
+            --tw-gradient-to: #fb7185;
+        }
+
+        .from-\[#fb7185\] {
+            --tw-gradient-from: #fb7185;
+        }
+
+        .to-\[#e11d48\] {
+            --tw-gradient-to: #e11d48;
+        }
+
+        .from-pink-100 {
+            --tw-gradient-from: #fce7f3;
+        }
+
+        .to-rose-300 {
+            --tw-gradient-to: #fda4af;
+        }
+
+        .from-pink-500\/10 {
+            --tw-gradient-from: rgba(236, 72, 153, 0.1);
+        }
+
+        .to-transparent {
+            --tw-gradient-to: transparent;
+        }
+
+        .from-pink-200 {
+            --tw-gradient-from: #fbcfe8;
+        }
+
+        .via-purple-200 {
+            --tw-gradient-stops: var(--tw-gradient-from), #e9d5ff, var(--tw-gradient-to, rgba(233, 213, 255, 0));
+        }
+
+        .to-indigo-200 {
+            --tw-gradient-to: #c7d2fe;
+        }
+
+        .bg-rose-500\/20 {
+            background-color: rgba(244, 63, 94, 0.2);
+        }
+
+        .bg-rose-500\/14 {
+            background-color: rgba(244, 63, 94, 0.14);
+        }
+
+        .bg-fuchsia-500\/10 {
+            background-color: rgba(217, 70, 239, 0.1);
+        }
+
+        .bg-pink-500\/20 {
+            background-color: rgba(236, 72, 153, 0.2);
+        }
+
+        .bg-pink-500\/30 {
+            background-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .bg-white\/3 {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .bg-white\/3 {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .pointer-events-none {
+            pointer-events: none;
+        }
+
+        .z-0 {
+            z-index: 0;
+        }
+
+        .z-10 {
+            z-index: 10;
+        }
+
+        .z-20 {
+            z-index: 20;
+        }
+
+        .z-50 {
+            z-index: 50;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .w-120 {
+            width: 30rem;
+        }
+
+        .w-135 {
+            width: 33.75rem;
+        }
+
+        .w-2\.5 {
+            width: 0.625rem;
+        }
+
+        .h-120 {
+            height: 30rem;
+        }
+
+        .h-135 {
+            height: 33.75rem;
+        }
+
+        .h-44 {
+            height: 11rem;
+        }
+
+        .h-54 {
+            height: 13.5rem;
+        }
+
+        .h-12 {
+            height: 3rem;
+        }
+
+        .h-32 {
+            height: 8rem;
+        }
+
+        .h-full {
+            height: 100%;
+        }
+
+        .max-w-100 {
+            max-width: 25rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .inset-x-0 {
+            left: 0;
+            right: 0;
+        }
+
+        .top-0 {
+            top: 0;
+        }
+
+        .top-1\/2 {
+            top: 50%;
+        }
+
+        .top-\[-12\%\] {
+            top: -12%;
+        }
+
+        .left-\[-8\%\] {
+            left: -8%;
+        }
+
+        .bottom-\[-18\%\] {
+            bottom: -18%;
+        }
+
+        .right-\[-10\%\] {
+            right: -10%;
+        }
+
+        .-translate-y-1\/2 {
+            --tw-translate-y: -50%;
+            transform: translateY(var(--tw-translate-y));
+        }
+
+        .left-0 {
+            left: 0;
+        }
+
+        .right-0 {
+            right: 0;
+        }
+
+        .-inset-5 {
+            top: -1.25rem;
+            right: -1.25rem;
+            bottom: -1.25rem;
+            left: -1.25rem;
+        }
+
+        .min-h-\[60vh\] {
+            min-height: 60vh;
+        }
+
+        .opacity-80 {
+            opacity: 0.8;
+        }
+
+        .opacity-70 {
+            opacity: 0.7;
+        }
+
+        .w-5 {
+            width: 1.25rem;
+        }
+
+        .h-5 {
+            height: 1.25rem;
+        }
+
+        .fill-current {
+            fill: currentColor;
+        }
+
+        /* Background animations and gradients */
+        .bg-\[radial-gradient\(circle_at_center\,rgba\(140\,60\,95\,0\.10\)_0\%\,transparent_68\%\)\] {
+            background-image: radial-gradient(circle at center, rgba(140,60,95,0.10) 0%, transparent 68%);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scale {
+            from {
+                transform: scale(0.85);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotate {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes heightPulse {
+            0%, 100% {
+                height: 12px;
+            }
+            50% {
+                height: var(--bar-height, 30px);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .animate-slideUp {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .animate-scale {
+            animation: scale 0.8s ease-out;
+        }
+
+        .animate-rotate {
+            animation: rotate 3s ease-in-out infinite;
+        }
+
+        .animate-pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+
+        .will-change-transform {
+            will-change: transform;
+        }
+
+        .antialias {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .select-none {
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        // Simple animation library to replace Framer Motion
+        class SimpleAnimation {
+            static animate(element, keyframes, options = {}) {
+                const {
+                    duration = 0.8,
+                    delay = 0,
+                    ease = 'easeInOut',
+                    onComplete = null
+                } = options;
+
+                setTimeout(() => {
+                    element.style.animation = `${keyframes} ${duration}s ${ease}`;
+                    if (onComplete) {
+                        setTimeout(onComplete, duration * 1000);
+                    }
+                }, delay * 1000);
+            }
+
+            static fadeIn(element, delay = 0) {
+                this.animate(element, 'fadeIn', { delay });
+            }
+
+            static slideUp(element, delay = 0) {
+                this.animate(element, 'slideUp', { delay });
+            }
+        }
+
+        // Application State
+        let currentScreen = 0;
+        let currentLyricLine = -1;
+        const audioElement = new Audio('/audio/bg.mp3');
+        audioElement.volume = 0.6;
+        audioElement.preload = 'auto';
+
+        // Lyrics data
+        const lyrics = [
+            "Jaayegi tu jahan",
+            "Aaunga main wahan",
+            "Meri banegi tu",
+            "Aana tujhe yahaan"
+        ];
+
+        const lyricTimings = [100, 1500, 3500, 5500];
+
+        // Render Screen 1
+        function renderScreen1() {
+            return `
+                <div class="flex flex-col items-center text-center space-y-7 bg-white/3 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] relative overflow-hidden animate-fadeIn">
+                    <div class="absolute top-0 inset-x-0 h-32 bg-linear-to-b from-pink-500/10 to-transparent pointer-events-none" />
+                    
+                    <div class="relative z-10">
+                        <div class="absolute inset-0 bg-pink-500/20 blur-2xl rounded-full" />
+                        <img src="/gifs/swinging.gif" alt="Cute bear" class="h-44 relative" style="filter: drop-shadow(0 2px 10px rgba(244,114,182,0.2));" />
+                    </div>
+                    
+                    <div class="space-y-3 relative z-10">
+                        <h1 class="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-br from-pink-200 via-pink-300 to-rose-200" style="filter: drop-shadow(0 2px 10px rgba(244,114,182,0.2));">
+                            I have something for you...
+                        </h1>
+                        <p class="text-pink-200/70 font-medium text-lg">
+                            It will only take a moment
+                        </p>
+                    </div>
+                    
+                    <button onclick="handleScreen1Next()" class="w-full mt-2 px-8 py-4 bg-linear-to-r from-[#ff4d6d] to-[#ff758f] rounded-4xl font-semibold text-white shadow-[0_0_20px_rgba(255,77,109,0.4)] transition-all hover:scale-105 active:scale-95">
+                        <span class="relative z-10 flex items-center justify-center gap-2">
+                            Open it <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </span>
+                    </button>
+                </div>
+            `;
+        }
+
+        // Render Screen 2
+        function renderScreen2() {
+            return `
+                <div class="flex flex-col items-center text-center space-y-7 bg-white/3 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] relative overflow-hidden animate-fadeIn">
+                    <div class="absolute top-0 inset-x-0 h-32 bg-linear-to-b from-rose-500/10 to-transparent pointer-events-none" />
+                    
+                    <div class="relative animate-rotate">
+                        <div class="absolute inset-0 bg-rose-500/20 blur-2xl rounded-full" />
+                        <img src="/gifs/holding.gif" alt="holding bear" class="h-44 relative" />
+                    </div>
+                    
+                    <div class="space-y-3 relative z-10">
+                        <h1 class="text-[2rem] font-black tracking-tight text-transparent bg-clip-text bg-linear-to-b from-rose-100 to-rose-400 leading-tight" style="filter: drop-shadow(0 0px 15px rgba(244,113,133,0.4));">
+                            You can't go too far from me <span class='text-white'>😌</span>
+                        </h1>
+                        <p class="text-pink-200/70 font-medium text-lg">
+                            Want to know why?
+                        </p>
+                    </div>
+                    
+                    <button onclick="handleScreen2Next()" class="w-full mt-2 px-8 py-4 bg-linear-to-r from-[#fb7185] to-[#e11d48] rounded-4xl font-semibold text-white shadow-[0_0_25px_rgba(225,29,72,0.4)] transition-all hover:scale-105 active:scale-95">
+                        <span class="relative z-10 flex items-center justify-center gap-2">
+                            Let me show you <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                        </span>
+                    </button>
+                </div>
+            `;
+        }
+
+        // Render Lyrics Screen
+        function renderLyricsScreen() {
+            const lyricsHtml = lyrics.map((line, index) => {
+                const isActive = currentLyricLine === index;
+                const isPast = currentLyricLine > index;
+                const opacity = isActive ? 1 : (isPast ? 0.2 : 0);
+                const scale = isActive ? 1.1 : 0.9;
+                const blur = isActive ? 0 : 4;
+                const zIndex = isActive ? 20 : 0;
+                const visibility = isActive || isPast ? 'visible' : 'hidden';
+                
+                return `
+                    <div class="absolute top-1/2 -translate-y-1/2 w-full text-4xl md:text-5xl font-black tracking-wide leading-tight will-change-transform" style="opacity: ${opacity}; transform: scale(${scale}) translateY(${isActive ? 0 : 40}px); filter: blur(${blur}px); z-index: ${zIndex}; visibility: ${visibility}; transition: all 0.3s ease;">
+                        ${line}
+                    </div>
+                `;
+            }).join('');
+
+            const barsHtml = [1, 2, 3, 4, 5].map((i) => {
+                const height = 20 + Math.random() * 20;
+                const duration = 0.6 + Math.random() * 0.4;
+                return `
+                    <div class="w-2.5 rounded-full shadow-[0_0_10px_rgba(244,114,182,0.5)]" style="height: 12px; background-color: #fbcfe8; animation: heightPulse ${duration}s ease-in-out infinite; --bar-height: ${height}px; animation-delay: ${i * 0.1}s;"></div>
+                `;
+            }).join('');
+
+            return `
+                <div class="flex flex-col items-center justify-center min-h-[60vh] text-center w-full relative animate-fadeIn">
+                    <div class="space-y-6 w-full relative z-10 flex flex-col items-center">
+                        ${lyricsHtml}
+                    </div>
+                    
+                    <div class="absolute bottom-10 flex gap-1.5 items-end justify-center h-12" style="opacity: ${currentLyricLine >= 0 ? 1 : 0};">
+                        ${barsHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Final Screen
+        function renderFinalScreen() {
+            return `
+                <div class="flex flex-col items-center text-center space-y-8 animate-fadeIn">
+                    <div class="relative" style="animation: scale 0.8s ease-out;">
+                        <div class="absolute -inset-5 bg-pink-500/30 rounded-full blur-2xl" style="animation: pulse 3s ease-in-out infinite;"></div>
+                        <img src="/gifs/hug.gif" alt="hug" class="h-54 relative z-10" style="filter: drop-shadow(0 25px 25px rgba(0,0,0,0.15));" />
+                    </div>
+                    
+                    <div class="bg-white/3 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.4)] w-full relative overflow-hidden" style="animation: slideUp 0.8s ease-out 0.6s both;">
+                        <div class="absolute top-0 inset-x-0 h-full bg-linear-to-b from-pink-500/5 to-transparent pointer-events-none" />
+                        
+                        <h1 class="text-4xl font-black mb-3 text-transparent bg-clip-text bg-linear-to-br from-pink-200 via-purple-200 to-indigo-200" style="filter: drop-shadow(0 0 15px rgba(236,72,153,0.5));">
+                            Forever Mine ❤️
+                        </h1>
+                        <p class="text-pink-200/80 font-medium text-lg">
+                            I love you so much ❤️
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Background component
+        function renderBackground() {
+            return `
+                <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 bg-[#08030a]">
+                    <div class="absolute top-[-12%] left-[-8%] w-120 h-120 rounded-full bg-rose-500/14 blur-[150px] opacity-80" />
+                    <div class="absolute bottom-[-18%] right-[-10%] w-135 h-135 rounded-full bg-fuchsia-500/10 blur-[160px] opacity-70" />
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(140,60,95,0.10)_0%,transparent_68%)]" />
+                    <div class="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/40" />
+                    <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,6,14,0.55),transparent_45%)]" />
+                </div>
+            `;
+        }
+
+        // Render current screen
+        function render() {
+            let screenContent = '';
+            
+            if (currentScreen === 0) {
+                screenContent = renderScreen1();
+            } else if (currentScreen === 1) {
+                screenContent = renderScreen2();
+            } else if (currentScreen === 2) {
+                screenContent = renderLyricsScreen();
+            } else if (currentScreen === 3) {
+                screenContent = renderFinalScreen();
+            }
+
+            const html = `
+                <div class="min-h-screen text-pink-50 flex items-center justify-center overflow-hidden relative">
+                    ${renderBackground()}
+                    
+                    <div class="relative z-10 w-full max-w-100 p-5">
+                        ${screenContent}
+                    </div>
+                    
+                    <div class="fixed bottom-4 right-4 text-sm text-white/40 pointer-events-none z-50 font-light" style="animation: slideUp 0.4s ease-out;">
+                        @anujbuilds
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('root').innerHTML = html;
+        }
+
+        // Event handlers
+        function handleScreen1Next() {
+            currentScreen = 1;
+            render();
+        }
+
+        function handleScreen2Next() {
+            audioElement.play().catch(err => console.log("Audio play failed:", err));
+            currentScreen = 2;
+            startLyricsAnimation();
+            render();
+        }
+
+        function startLyricsAnimation() {
+            currentLyricLine = -1;
+            
+            lyricTimings.forEach((time, index) => {
+                setTimeout(() => {
+                    currentLyricLine = index;
+                    render();
+                }, time);
+            });
+            
+            setTimeout(() => {
+                currentScreen = 3;
+                render();
+            }, 7500);
+        }
+
+        // Initial render
+        render();
+    </script>
+</body>
+</html>
